@@ -24,10 +24,12 @@ app.add_middleware(
     CORSMiddleware,
 
     allow_origins=[
-    "http://localhost:5173",
-    "http://localhost:8080",
-    "http://localhost:8081",
-],
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:8080",
+        "http://localhost:8081",
+        "https://shopgraph-explorer-frontend.onrender.com",
+    ],
 
     allow_credentials=True,
 
@@ -62,7 +64,6 @@ app.include_router(
 
 @app.get("/")
 def root():
-
     return {
         "message": "ShopGraph API is running"
     }
@@ -74,7 +75,6 @@ def root():
 
 @app.get("/api/health")
 def health():
-
     return {
         "status": "ok",
         "service": "ShopGraph Backend"
