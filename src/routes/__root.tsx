@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 import {
   QueryClient,
   QueryClientProvider,
@@ -83,17 +85,18 @@ export const Route =
 
         {
           name: "twitter:card",
-          content:
-            "summary_large_image",
+          content: "summary_large_image",
         },
       ],
 
       links: [
+        /* Global application CSS */
         {
           rel: "stylesheet",
           href: appCss,
         },
 
+        /* Google Fonts */
         {
           rel: "preconnect",
           href: "https://fonts.googleapis.com",
@@ -102,8 +105,7 @@ export const Route =
         {
           rel: "preconnect",
           href: "https://fonts.gstatic.com",
-          crossOrigin:
-            "anonymous",
+          crossOrigin: "anonymous",
         },
 
         {
@@ -112,6 +114,7 @@ export const Route =
             "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap",
         },
 
+        /* Favicon */
         {
           rel: "icon",
           href: "/favicon.ico",
@@ -120,13 +123,11 @@ export const Route =
       ],
     }),
 
-
     /* =======================================================
        SHELL
     ======================================================= */
 
     shellComponent: RootShell,
-
 
     /* =======================================================
        ROOT COMPONENT
@@ -134,21 +135,17 @@ export const Route =
 
     component: RootComponent,
 
-
     /* =======================================================
        404
     ======================================================= */
 
-    notFoundComponent:
-      NotFoundComponent,
-
+    notFoundComponent: NotFoundComponent,
 
     /* =======================================================
        ERROR
     ======================================================= */
 
-    errorComponent:
-      ErrorComponent,
+    errorComponent: ErrorComponent,
   });
 
 
@@ -161,25 +158,17 @@ function RootShell({
 }: {
   children: ReactNode;
 }) {
-
   return (
     <html lang="en">
-
       <head>
-
         <HeadContent />
-
       </head>
 
-
       <body>
-
         {children}
 
         <Scripts />
-
       </body>
-
     </html>
   );
 }
@@ -190,38 +179,18 @@ function RootShell({
 ========================================================= */
 
 function RootComponent() {
-
   const {
     queryClient,
   } = Route.useRouteContext();
 
-
   return (
-
     <QueryClientProvider
       client={queryClient}
     >
-
-      {/* 
-        CartProvider MUST be above Outlet.
-        This makes the cart available to:
-        - SiteHeader
-        - Product pages
-        - Cart page
-        - Explore
-        - Recommendations
-        - Profile
-        - Graph
-      */}
-
       <CartProvider>
-
         <Outlet />
-
       </CartProvider>
-
     </QueryClientProvider>
-
   );
 }
 
@@ -231,28 +200,22 @@ function RootComponent() {
 ========================================================= */
 
 function NotFoundComponent() {
-
   return (
-
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-
       <div className="max-w-md text-center">
 
         <h1 className="text-7xl font-bold text-foreground">
           404
         </h1>
 
-
         <h2 className="mt-4 text-xl font-semibold text-foreground">
           Page not found
         </h2>
-
 
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't
           exist or has been moved.
         </p>
-
 
         <div className="mt-6">
 
@@ -264,11 +227,8 @@ function NotFoundComponent() {
           </Link>
 
         </div>
-
       </div>
-
     </div>
-
   );
 }
 
@@ -284,16 +244,11 @@ function ErrorComponent({
   error: Error;
   reset: () => void;
 }) {
-
   console.error(error);
 
-
-  const router =
-    useRouter();
-
+  const router = useRouter();
 
   useEffect(() => {
-
     reportLovableError(
       error,
       {
@@ -301,20 +256,15 @@ function ErrorComponent({
           "tanstack_root_error_component",
       },
     );
-
   }, [error]);
 
-
   return (
-
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-
       <div className="max-w-md text-center">
 
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           This page didn't load
         </h1>
-
 
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong on our end.
@@ -322,27 +272,18 @@ function ErrorComponent({
           home.
         </p>
 
-
         <div className="mt-6 flex flex-wrap justify-center gap-2">
 
-
-          {/* TRY AGAIN */}
-
           <button
+            type="button"
             onClick={() => {
-
               router.invalidate();
-
               reset();
-
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Try again
           </button>
-
-
-          {/* HOME */}
 
           <a
             href="/"
@@ -352,10 +293,7 @@ function ErrorComponent({
           </a>
 
         </div>
-
       </div>
-
     </div>
-
   );
 }

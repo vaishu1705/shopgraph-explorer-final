@@ -9,7 +9,9 @@ import type {
   ReasonStep,
 } from "@/data/types";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ??
+  "https://shopgraph-explorer-final.onrender.com";
 
 interface BackendRecommendation {
   product_id: number;

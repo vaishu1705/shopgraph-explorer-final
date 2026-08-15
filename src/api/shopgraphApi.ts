@@ -3,8 +3,7 @@ import type {
   Recommendation,
 } from "../data/types";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
-
+const API_BASE_URL = "https://shopgraph-explorer-final.onrender.com";
 interface BackendProduct {
   id: number;
   name: string;
